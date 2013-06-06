@@ -1,0 +1,540 @@
+[33mcommit 4fc63735ff707b846f1562fcaf8b554501304af8[m
+Author: Sven <mimesis17@gmail.com>
+Date:   Wed Jun 5 23:44:19 2013 -0400
+
+    improve
+
+[1mdiff --git a/README.md b/README.md[m
+[1mnew file mode 100644[m
+[1mindex 0000000..3e1c15c[m
+[1m--- /dev/null[m
+[1m+++ b/README.md[m
+[36m@@ -0,0 +1,261 @@[m
+[32m+[m[32m== Welcome to Rails[m
+[32m+[m
+[32m+[m[32mRails is a web-application framework that includes everything needed to create[m
+[32m+[m[32mdatabase-backed web applications according to the Model-View-Control pattern.[m
+[32m+[m
+[32m+[m[32mThis pattern splits the view (also called the presentation) into "dumb"[m
+[32m+[m[32mtemplates that are primarily responsible for inserting pre-built data in between[m
+[32m+[m[32mHTML tags. The model contains the "smart" domain objects (such as Account,[m
+[32m+[m[32mProduct, Person, Post) that holds all the business logic and knows how to[m
+[32m+[m[32mpersist themselves to a database. The controller handles the incoming requests[m
+[32m+[m[32m(such as Save New Account, Update Product, Show Post) by manipulating the model[m
+[32m+[m[32mand directing data to the view.[m
+[32m+[m
+[32m+[m[32mIn Rails, the model is handled by what's called an object-relational mapping[m
+[32m+[m[32mlayer entitled Active Record. This layer allows you to present the data from[m
+[32m+[m[32mdatabase rows as objects and embellish these data objects with business logic[m
+[32m+[m[32mmethods. You can read more about Active Record in[m
+[32m+[m[32mlink:files/vendor/rails/activerecord/README.html.[m
+[32m+[m
+[32m+[m[32mThe controller and view are handled by the Action Pack, which handles both[m
+[32m+[m[32mlayers by its two parts: Action View and Action Controller. These two layers[m
+[32m+[m[32mare bundled in a single package due to their heavy interdependence. This is[m
+[32m+[m[32munlike the relationship between the Active Record and Action Pack that is much[m
+[32m+[m[32mmore separate. Each of these packages can be used independently outside of[m
+[32m+[m[32mRails. You can read more about Action Pack in[m
+[32m+[m[32mlink:files/vendor/rails/actionpack/README.html.[m
+[32m+[m
+[32m+[m
+[32m+[m[32m== Getting Started[m
+[32m+[m
+[32m+[m[32m1. At the command prompt, create a new Rails application:[m
+[32m+[m[32m       <tt>rails new myapp</tt> (where <tt>myapp</tt> is the application name)[m
+[32m+[m
+[32m+[m[32m2. Change directory to <tt>myapp</tt> and start the web server:[m
+[32m+[m[32m       <tt>cd myapp; rails server</tt> (run with --help for options)[m
+[32m+[m
+[32m+[m[32m3. Go to http://localhost:3000/ and you'll see:[m
+[32m+[m[32m       "Welcome aboard: You're riding Ruby on Rails!"[m
+[32m+[m
+[32m+[m[32m4. Follow the guidelines to start developing your application. You can find[m
+[32m+[m[32mthe following resources handy:[m
+[32m+[m
+[32m+[m[32m* The Getting Started Guide: http://guides.rubyonrails.org/getting_started.html[m
+[32m+[m[32m* Ruby on Rails Tutorial Book: http://www.railstutorial.org/[m
+[32m+[m
+[32m+[m
+[32m+[m[32m== Debugging Rails[m
+[32m+[m
+[32m+[m[32mSometimes your application goes wrong. Fortunately there are a lot of tools that[m
+[32m+[m[32mwill help you debug it and get it back on the rails.[m
+[32m+[m
+[32m+[m[32mFirst area to check is the application log files. Have "tail -f" commands[m
+[32m+[m[32mrunning on the server.log and development.log. Rails will automatically display[m
+[32m+[m[32mdebugging and runtime information to these files. Debugging info will also be[m
+[32m+[m[32mshown in the browser on requests from 127.0.0.1.[m
+[32m+[m
+[32m+[m[32mYou can also log your own messages directly into the log file from your code[m
+[32m+[m[32musing the Ruby logger class from inside your controllers. Example:[m
+[32m+[m
+[32m+[m[32m  class WeblogController < ActionController::Base[m
+[32m+[m[32m    def destroy[m
+[32m+[m[32m      @weblog = Weblog.find(params[:id])[m
+[32m+[m[32m      @weblog.destroy[m
+[32m+[m[32m      logger.info("#{Time.now} Destroyed Weblog ID ##{@weblog.id}!")[m
+[32m+[m[32m    end[m
+[32m+[m[32m  end[m
+[32m+[m
+[32m+[m[32mThe result will be a message in your log file along the lines of:[m
+[32m+[m
+[32m+[m[32m  Mon Oct 08 14:22:29 +1000 2007 Destroyed Weblog ID #1![m
+[32m+[m
+[32m+[m[32mMore information on how to use the logger is at http://www.ruby-doc.org/core/[m
+[32m+[m
+[32m+[m[32mAlso, Ruby documentation can be found at http://www.ruby-lang.org/. There are[m
+[32m+[m[32mseveral books available online as well:[m
+[32m+[m
+[32m+[m[32m* Programming Ruby: http://www.ruby-doc.org/docs/ProgrammingRuby/ (Pickaxe)[m
+[32m+[m[32m* Learn to Program: http://pine.fm/LearnToProgram/ (a beginners guide)[m
+[32m+[m
+[32m+[m[32mThese two books will bring you up to speed on the Ruby language and also on[m
+[32m+[m[32mprogramming in general.[m
+[32m+[m
+[32m+[m
+[32m+[m[32m== Debugger[m
+[32m+[m
+[32m+[m[32mDebugger support is available through the debugger command when you start your[m
+[32m+[m[32mMongrel or WEBrick server with --debugger. This means that you can break out of[m
+[32m+[m[32mexecution at any point in the code, investigate and change the model, and then,[m
+[32m+[m[32mresume execution! You need to install ruby-debug to run the server in debugging[m
+[32m+[m[32mmode. With gems, use <tt>sudo gem install ruby-debug</tt>. Example:[m
+[32m+[m
+[32m+[m[32m  class WeblogController < ActionController::Base[m
+[32m+[m[32m    def index[m
+[32m+[m[32m      @posts = Post.all[m
+[32m+[m[32m      debugger[m
+[32m+[m[32m    end[m
+[32m+[m[32m  end[m
+[32m+[m
+[32m+[m[32mSo the controller will accept the action, run the first line, then present you[m
+[32m+[m[32mwith a IRB prompt in the server window. Here you can do things like:[m
+[32m+[m
+[32m+[m[32m  >> @posts.inspect[m
+[32m+[m[32m  => "[#<Post:0x14a6be8[m
+[32m+[m[32m          @attributes={"title"=>nil, "body"=>nil, "id"=>"1"}>,[m
+[32m+[m[32m       #<Post:0x14a6620[m
+[32m+[m[32m          @attributes={"title"=>"Rails", "body"=>"Only ten..", "id"=>"2"}>]"[m
+[32m+[m[32m  >> @posts.first.title = "hello from a debugger"[m
+[32m+[m[32m  => "hello from a debugger"[m
+[32m+[m
+[32m+[m[32m...and even better, you can examine how your runtime objects actually work:[m
+[32m+[m
+[32m+[m[32m  >> f = @posts.first[m
+[32m+[m[32m  => #<Post:0x13630c4 @attributes={"title"=>nil, "body"=>nil, "id"=>"1"}>[m
+[32m+[m[32m  >> f.[m
+[32m+[m[32m  Display all 152 possibilities? (y or n)[m
+[32m+[m
+[32m+[m[32mFinally, when you're ready to resume execution, you can enter "cont".[m
+[32m+[m
+[32m+[m
+[32m+[m[32m== Console[m
+[32m+[m
+[32m+[m[32mThe console is a Ruby shell, which allows you to interact with your[m
+[32m+[m[32mapplication's domain model. Here you'll have all parts of the application[m
+[32m+[m[32mconfigured, just like it is when the application is running. You can inspect[m
+[32m+[m[32mdomain models, change values, and save to the database. Starting the script[m
+[32m+[m[32mwithout arguments will launch it in the development environment.[m
+[32m+[m
+[32m+[m[32mTo start the console, run <tt>rails console</tt> from the application[m
+[32m+[m[32mdirectory.[m
+[32m+[m
+[32m+[m[32mOptions:[m
+[32m+[m
+[32m+[m[32m* Passing the <tt>-s, --sandbox</tt> argument will rollback any modifications[m
+[32m+[m[32m  made to the database.[m
+[32m+[m[32m* Passing an environment name as an argument will load the corresponding[m
+[32m+[m[32m  environment. Example: <tt>rails console production</tt>.[m
+[32m+[m
+[32m+[m[32mTo reload your controllers and models after launching the console run[m
+[32m+[m[32m<tt>reload!</tt>[m
+[32m+[m
+[32m+[m[32mMore information about irb can be found at:[m
+[32m+[m[32mlink:http://www.rubycentral.org/pickaxe/irb.html[m
+[32m+[m
+[32m+[m
+[32m+[m[32m== dbconsole[m
+[32m+[m
+[32m+[m[32mYou can go to the command line of your database directly through <tt>rails[m
+[32m+[m[32mdbconsole</tt>. You would be connected to the database with the credentials[m
+[32m+[m[32mdefined in database.yml. Starting the script without arguments will connect you[m
+[32m+[m[32mto the development database. Passing an argument will connect you to a different[m
+[32m+[m[32mdatabase, like <tt>rails dbconsole production</tt>. Currently works for MySQL,[m
+[32m+[m[32mPostgreSQL and SQLite 3.[m
+[32m+[m
+[32m+[m[32m== Description of Contents[m
+[32m+[m
+[32m+[m[32mThe default directory structure of a generated Ruby on Rails application:[m
+[32m+[m
+[32m+[m[32m  |-- app[m
+[32m+[m[32m  |   |-- assets[m
+[32m+[m[32m  |   |   |-- images[m
+[32m+[m[32m  |   |   |-- javascripts[m
+[32m+[m[32m  |   |   `-- stylesheets[m
+[32m+[m[32m  |   |-- controllers[m
+[32m+[m[32m  |   |-- helpers[m
+[32m+[m[32m  |   |-- mailers[m
+[32m+[m[32m  |   |-- models[m
+[32m+[m[32m  |   `-- views[m
+[32m+[m[32m  |       `-- layouts[m
+[32m+[m[32m  |-- config[m
+[32m+[m[32m  |   |-- environments[m
+[32m+[m[32m  |   |-- initializers[m
+[32m+[m[32m  |   `-- locales[m
+[32m+[m[32m  |-- db[m
+[32m+[m[32m  |-- doc[m
+[32m+[m[32m  |-- lib[m
+[32m+[m[32m  |   |-- assets[m
+[32m+[m[32m  |   `-- tasks[m
+[32m+[m[32m  |-- log[m
+[32m+[m[32m  |-- public[m
+[32m+[m[32m  |-- script[m
+[32m+[m[32m  |-- test[m
+[32m+[m[32m  |   |-- fixtures[m
+[32m+[m[32m  |   |-- functional[m
+[32m+[m[32m  |   |-- integration[m
+[32m+[m[32m  |   |-- performance[m
+[32m+[m[32m  |   `-- unit[m
+[32m+[m[32m  |-- tmp[m
+[32m+[m[32m  |   `-- cache[m
+[32m+[m[32m  |       `-- assets[m
+[32m+[m[32m  `-- vendor[m
+[32m+[m[32m      |-- assets[m
+[32m+[m[32m      |   |-- javascripts[m
+[32m+[m[32m      |   `-- stylesheets[m
+[32m+[m[32m      `-- plugins[m
+[32m+[m
+[32m+[m[32mapp[m
+[32m+[m[32m  Holds all the code that's specific to this particular application.[m
+[32m+[m
+[32m+[m[32mapp/assets[m
+[32m+[m[32m  Contains subdirectories for images, stylesheets, and JavaScript files.[m
+[32m+[m
+[32m+[m[32mapp/controllers[m
+[32m+[m[32m  Holds controllers that should be named like weblogs_controller.rb for[m
+[32m+[m[32m  automated URL mapping. All controllers should descend from[m
+[32m+[m[32m  ApplicationController which itself descends from ActionController::Base.[m
+[32m+[m
+[32m+[m[32mapp/models[m
+[32m+[m[32m  Holds models that should be named like post.rb. Models descend from[m
+[32m+[m[32m  ActiveRecord::Base by default.[m
+[32m+[m
+[32m+[m[32mapp/views[m
+[32m+[m[32m  Holds the template files for the view that should be named like[m
+[32m+[m[32m  weblogs/index.html.erb for the WeblogsController#index action. All views use[m
+[32m+[m[32m  eRuby syntax by default.[m
+[32m+[m
+[32m+[m[32mapp/views/layouts[m
+[32m+[m[32m  Holds the template files for layouts to be used with views. This models the[m
+[32m+[m[32m  common header/footer method of wrapping views. In your views, define a layout[m
+[32m+[m[32m  using the <tt>layout :default</tt> and create a file named default.html.erb.[m
+[32m+[m[32m  Inside default.html.erb, call <% yield %> to render the view using this[m
+[32m+[m[32m  layout.[m
+[32m+[m
+[32m+[m[32mapp/helpers[m
+[32m+[m[32m  Holds view helpers that should be named like weblogs_helper.rb. These are[m
+[32m+[m[32m  generated for you automatically when using generators for controllers.[m
+[32m+[m[32m  Helpers can be used to wrap functionality for your views into methods.[m
+[32m+[m
+[32m+[m[32mconfig[m
+[32m+[m[32m  Configuration files for the Rails environment, the routing map, the database,[m
+[32m+[m[32m  and other dependencies.[m
+[32m+[m
+[32m+[m[32mdb[m
+[32m+[m[32m  Contains the database schema in schema.rb. db/migrate contains all the[m
+[32m+[m[32m  sequence of Migrations for your schema.[m
+[32m+[m
+[32m+[m[32mdoc[m
+[32m+[m[32m  This directory is where your application documentation will be stored when[m
+[32m+[m[32m  generated using <tt>rake doc:app</tt>[m
+[32m+[m
+[32m+[m[32mlib[m
+[32m+[m[32m  Application specific libraries. Basically, any kind of custom code that[m
+[32m+[m[32m  doesn't belong under controllers, models, or helpers. This directory is in[m
+[32m+[m[32m  the load path.[m
+[32m+[m
+[32m+[m[32mpublic[m
+[32m+[m[32m  The directory available for the web server. Also contains the dispatchers and the[m
+[32m+[m[32m  default HTML files. This should be set as the DOCUMENT_ROOT of your web[m
+[32m+[m[32m  server.[m
+[32m+[m
+[32m+[m[32mscript[m
+[32m+[m[32m  Helper scripts for automation and generation.[m
+[32m+[m
+[32m+[m[32mtest[m
+[32m+[m[32m  Unit and functional tests along with fixtures. When using the rails generate[m
+[32m+[m[32m  command, template test files will be generated for you and placed in this[m
+[32m+[m[32m  directory.[m
+[32m+[m
+[32m+[m[32mvendor[m
+[32m+[m[32m  External libraries that the application depends on. Also includes the plugins[m
+[32m+[m[32m  subdirectory. If the app has frozen rails, those gems also go here, under[m
+[32m+[m[32m  vendor/rails/. This directory is in the load path.[m
+[1mdiff --git a/README.rdoc b/README.rdoc[m
+[1mdeleted file mode 100644[m
+[1mindex 3e1c15c..0000000[m
+[1m--- a/README.rdoc[m
+[1m+++ /dev/null[m
+[36m@@ -1,261 +0,0 @@[m
+[31m-== Welcome to Rails[m
+[31m-[m
+[31m-Rails is a web-application framework that includes everything needed to create[m
+[31m-database-backed web applications according to the Model-View-Control pattern.[m
+[31m-[m
+[31m-This pattern splits the view (also called the presentation) into "dumb"[m
+[31m-templates that are primarily responsible for inserting pre-built data in between[m
+[31m-HTML tags. The model contains the "smart" domain objects (such as Account,[m
+[31m-Product, Person, Post) that holds all the business logic and knows how to[m
+[31m-persist themselves to a database. The controller handles the incoming requests[m
+[31m-(such as Save New Account, Update Product, Show Post) by manipulating the model[m
+[31m-and directing data to the view.[m
+[31m-[m
+[31m-In Rails, the model is handled by what's called an object-relational mapping[m
+[31m-layer entitled Active Record. This layer allows you to present the data from[m
+[31m-database rows as objects and embellish these data objects with business logic[m
+[31m-methods. You can read more about Active Record in[m
+[31m-link:files/vendor/rails/activerecord/README.html.[m
+[31m-[m
+[31m-The controller and view are handled by the Action Pack, which handles both[m
+[31m-layers by its two parts: Action View and Action Controller. These two layers[m
+[31m-are bundled in a single package due to their heavy interdependence. This is[m
+[31m-unlike the relationship between the Active Record and Action Pack that is much[m
+[31m-more separate. Each of these packages can be used independently outside of[m
+[31m-Rails. You can read more about Action Pack in[m
+[31m-link:files/vendor/rails/actionpack/README.html.[m
+[31m-[m
+[31m-[m
+[31m-== Getting Started[m
+[31m-[m
+[31m-1. At the command prompt, create a new Rails application:[m
+[31m-       <tt>rails new myapp</tt> (where <tt>myapp</tt> is the application name)[m
+[31m-[m
+[31m-2. Change directory to <tt>myapp</tt> and start the web server:[m
+[31m-       <tt>cd myapp; rails server</tt> (run with --help for options)[m
+[31m-[m
+[31m-3. Go to http://localhost:3000/ and you'll see:[m
+[31m-       "Welcome aboard: You're riding Ruby on Rails!"[m
+[31m-[m
+[31m-4. Follow the guidelines to start developing your application. You can find[m
+[31m-the following resources handy:[m
+[31m-[m
+[31m-* The Getting Started Guide: http://guides.rubyonrails.org/getting_started.html[m
+[31m-* Ruby on Rails Tutorial Book: http://www.railstutorial.org/[m
+[31m-[m
+[31m-[m
+[31m-== Debugging Rails[m
+[31m-[m
+[31m-Sometimes your application goes wrong. Fortunately there are a lot of tools that[m
+[31m-will help you debug it and get it back on the rails.[m
+[31m-[m
+[31m-First area to check is the application log files. Have "tail -f" commands[m
+[31m-running on the server.log and development.log. Rails will automatically display[m
+[31m-debugging and runtime information to these files. Debugging info will also be[m
+[31m-shown in the browser on requests from 127.0.0.1.[m
+[31m-[m
+[31m-You can also log your own messages directly into the log file from your code[m
+[31m-using the Ruby logger class from inside your controllers. Example:[m
+[31m-[m
+[31m-  class WeblogController < ActionController::Base[m
+[31m-    def destroy[m
+[31m-      @weblog = Weblog.find(params[:id])[m
+[31m-      @weblog.destroy[m
+[31m-      logger.info("#{Time.now} Destroyed Weblog ID ##{@weblog.id}!")[m
+[31m-    end[m
+[31m-  end[m
+[31m-[m
+[31m-The result will be a message in your log file along the lines of:[m
+[31m-[m
+[31m-  Mon Oct 08 14:22:29 +1000 2007 Destroyed Weblog ID #1![m
+[31m-[m
+[31m-More information on how to use the logger is at http://www.ruby-doc.org/core/[m
+[31m-[m
+[31m-Also, Ruby documentation can be found at http://www.ruby-lang.org/. There are[m
+[31m-several books available online as well:[m
+[31m-[m
+[31m-* Programming Ruby: http://www.ruby-doc.org/docs/ProgrammingRuby/ (Pickaxe)[m
+[31m-* Learn to Program: http://pine.fm/LearnToProgram/ (a beginners guide)[m
+[31m-[m
+[31m-These two books will bring you up to speed on the Ruby language and also on[m
+[31m-programming in general.[m
+[31m-[m
+[31m-[m
+[31m-== Debugger[m
+[31m-[m
+[31m-Debugger support is available through the debugger command when you start your[m
+[31m-Mongrel or WEBrick server with --debugger. This means that you can break out of[m
+[31m-execution at any point in the code, investigate and change the model, and then,[m
+[31m-resume execution! You need to install ruby-debug to run the server in debugging[m
+[31m-mode. With gems, use <tt>sudo gem install ruby-debug</tt>. Example:[m
+[31m-[m
+[31m-  class WeblogController < ActionController::Base[m
+[31m-    def index[m
+[31m-      @posts = Post.all[m
+[31m-      debugger[m
+[31m-    end[m
+[31m-  end[m
+[31m-[m
+[31m-So the controller will accept the action, run the first line, then present you[m
+[31m-with a IRB prompt in the server window. Here you can do things like:[m
+[31m-[m
+[31m-  >> @posts.inspect[m
+[31m-  => "[#<Post:0x14a6be8[m
+[31m-          @attributes={"title"=>nil, "body"=>nil, "id"=>"1"}>,[m
+[31m-       #<Post:0x14a6620[m
+[31m-          @attributes={"title"=>"Rails", "body"=>"Only ten..", "id"=>"2"}>]"[m
+[31m-  >> @posts.first.title = "hello from a debugger"[m
+[31m-  => "hello from a debugger"[m
+[31m-[m
+[31m-...and even better, you can examine how your runtime objects actually work:[m
+[31m-[m
+[31m-  >> f = @posts.first[m
+[31m-  => #<Post:0x13630c4 @attributes={"title"=>nil, "body"=>nil, "id"=>"1"}>[m
+[31m-  >> f.[m
+[31m-  Display all 152 possibilities? (y or n)[m
+[31m-[m
+[31m-Finally, when you're ready to resume execution, you can enter "cont".[m
+[31m-[m
+[31m-[m
+[31m-== Console[m
+[31m-[m
+[31m-The console is a Ruby shell, which allows you to interact with your[m
+[31m-application's domain model. Here you'll have all parts of the application[m
+[31m-configured, just like it is when the application is running. You can inspect[m
+[31m-domain models, change values, and save to the database. Starting the script[m
+[31m-without arguments will launch it in the development environment.[m
+[31m-[m
+[31m-To start the console, run <tt>rails console</tt> from the application[m
+[31m-directory.[m
+[31m-[m
+[31m-Options:[m
+[31m-[m
+[31m-* Passing the <tt>-s, --sandbox</tt> argument will rollback any modifications[m
+[31m-  made to the database.[m
+[31m-* Passing an environment name as an argument will load the corresponding[m
+[31m-  environment. Example: <tt>rails console production</tt>.[m
+[31m-[m
+[31m-To reload your controllers and models after launching the console run[m
+[31m-<tt>reload!</tt>[m
+[31m-[m
+[31m-More information about irb can be found at:[m
+[31m-link:http://www.rubycentral.org/pickaxe/irb.html[m
+[31m-[m
+[31m-[m
+[31m-== dbconsole[m
+[31m-[m
+[31m-You can go to the command line of your database directly through <tt>rails[m
+[31m-dbconsole</tt>. You would be connected to the database with the credentials[m
+[31m-defined in database.yml. Starting the script without arguments will connect you[m
+[31m-to the development database. Passing an argument will connect you to a different[m
+[31m-database, like <tt>rails dbconsole production</tt>. Currently works for MySQL,[m
+[31m-PostgreSQL and SQLite 3.[m
+[31m-[m
+[31m-== Description of Contents[m
+[31m-[m
+[31m-The default directory structure of a generated Ruby on Rails application:[m
+[31m-[m
+[31m-  |-- app[m
+[31m-  |   |-- assets[m
+[31m-  |   |   |-- images[m
+[31m-  |   |   |-- javascripts[m
+[31m-  |   |   `-- stylesheets[m
+[31m-  |   |-- controllers[m
+[31m-  |   |-- helpers[m
+[31m-  |   |-- mailers[m
+[31m-  |   |-- models[m
+[31m-  |   `-- views[m
+[31m-  |       `-- layouts[m
+[31m-  |-- config[m
+[31m-  |   |-- environments[m
+[31m-  |   |-- initializers[m
+[31m-  |   `-- locales[m
+[31m-  |-- db[m
+[31m-  |-- doc[m
+[31m-  |-- lib[m
+[31m-  |   |-- assets[m
+[31m-  |   `-- tasks[m
+[31m-  |-- log[m
+[31m-  |-- public[m
+[31m-  |-- script[m
+[31m-  |-- test[m
+[31m-  |   |-- fixtures[m
+[31m-  |   |-- functional[m
+[31m-  |   |-- integration[m
+[31m-  |   |-- performance[m
+[31m-  |   `-- unit[m
+[31m-  |-- tmp[m
+[31m-  |   `-- cache[m
+[31m-  |       `-- assets[m
+[31m-  `-- vendor[m
+[31m-      |-- assets[m
+[31m-      |   |-- javascripts[m
+[31m-      |   `-- stylesheets[m
+[31m-      `-- plugins[m
+[31m-[m
+[31m-app[m
+[31m-  Holds all the code that's specific to this particular application.[m
+[31m-[m
+[31m-app/assets[m
+[31m-  Contains subdirectories for images, stylesheets, and JavaScript files.[m
+[31m-[m
+[31m-app/controllers[m
+[31m-  Holds controllers that should be named like weblogs_controller.rb for[m
+[31m-  automated URL mapping. All controllers should descend from[m
+[31m-  ApplicationController which itself descends from ActionController::Base.[m
+[31m-[m
+[31m-app/models[m
+[31m-  Holds models that should be named like post.rb. Models descend from[m
+[31m-  ActiveRecord::Base by default.[m
+[31m-[m
+[31m-app/views[m
+[31m-  Holds the template files for the view that should be named like[m
+[31m-  weblogs/index.html.erb for the WeblogsController#index action. All views use[m
+[31m-  eRuby syntax by default.[m
+[31m-[m
+[31m-app/views/layouts[m
+[31m-  Holds the template files for layouts to be used with views. This models the[m
+[31m-  common header/footer method of wrapping views. In your views, define a layout[m
+[31m-  using the <tt>layout :default</tt> and create a file named default.html.erb.[m
+[31m-  Inside default.html.erb, call <% yield %> to render the view using this[m
+[31m-  layout.[m
+[31m-[m
+[31m-app/helpers[m
+[31m-  Holds view helpers that should be named like weblogs_helper.rb. These are[m
+[31m-  generated for you automatically when using generators for controllers.[m
+[31m-  Helpers can be used to wrap functionality for your views into methods.[m
+[31m-[m
+[31m-config[m
+[31m-  Configuration files for the Rails environment, the routing map, the database,[m
+[31m-  and other dependencies.[m
+[31m-[m
+[31m-db[m
+[31m-  Contains the database schema in schema.rb. db/migrate contains all the[m
+[31m-  sequence of Migrations for your schema.[m
+[31m-[m
+[31m-doc[m
+[31m-  This directory is where your application documentation will be stored when[m
+[31m-  generated using <tt>rake doc:app</tt>[m
+[31m-[m
+[31m-lib[m
+[31m-  Application specific libraries. Basically, any kind of custom code that[m
+[31m-  doesn't belong under controllers, models, or helpers. This directory is in[m
+[31m-  the load path.[m
+[31m-[m
+[31m-public[m
+[31m-  The directory available for the web server. Also contains the dispatchers and the[m
+[31m-  default HTML files. This should be set as the DOCUMENT_ROOT of your web[m
+[31m-  server.[m
+[31m-[m
+[31m-script[m
+[31m-  Helper scripts for automation and generation.[m
+[31m-[m
+[31m-test[m
+[31m-  Unit and functional tests along with fixtures. When using the rails generate[m
+[31m-  command, template test files will be generated for you and placed in this[m
+[31m-  directory.[m
+[31m-[m
+[31m-vendor[m
+[31m-  External libraries that the application depends on. Also includes the plugins[m
+[31m-  subdirectory. If the app has frozen rails, those gems also go here, under[m
+[31m-  vendor/rails/. This directory is in the load path.[m
